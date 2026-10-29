@@ -1,0 +1,62 @@
+Classes / Things they need to be able to do
+
+MenuItem class
+- stores info (name, price, etc.)
+
+Table class
+- stores info (number, capacity, status, food ordered, etc.)
+- seat a party (change status to full)
+- free the table (change status to dirty)
+- clean the table (change status to clean/empty)
+- report it's info (as stored above)
+
+Layout/Floor class
+- Stores the tables as an array
+- get a table by number
+- find the best fit table for each party size
+- list table statuses
+- print floor info
+
+Order class
+- stores what everyone ordered in a list (item, quantity)
+- adding an item
+- removing / changing quantity of item
+- check if empty
+- calculate total
+- produce a ticket for the kitchen
+- produce a formal receipt
+
+Ticket class
+- stores info (table number, food ordered and quantity, wait time)
+- get info from ticket
+- report wait time??
+
+Kitchen class
+- stores a deque of tickets
+- send ticket to back
+- send ticket to front
+- undo newest ticket
+- get next ticket
+- print pending tickets
+
+Main method
+- stores menu, floor plan, kitchen, receipt log, total earnings
+- set up menu and floor plan
+- method that shows entire menu
+- validate input
+
+
+Suggested order of creation:
+1. TableStatus, Table, Floor
+2. MenuItem and Order
+3. Ticket and Kitchen
+4. Main with a simple menu loop
+5. CleaningQueue, then SalesReport
+6. WaitList
+
+
+OPTIONAL ADDITIONS:
+- Cleaning queue (tells the busser which table is next)
+- Wait list
+- Sales Report
+- Receipt Log
