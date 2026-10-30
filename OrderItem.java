@@ -1,16 +1,16 @@
-package Restaurant;
+package Restaurant_Manager;
 
 public class OrderItem {
 
-    private MenuItem item;
+    private MenuItems item;
     private int quantity;
 
-    public OrderItem(MenuItem item, int quantity) {
+    public OrderItem(MenuItems item, int quantity) {
         this.item = item;
         this.quantity = quantity;
     }
 
-    public MenuItem getItem() {
+    public MenuItems getItem() {
         return item;
     }
 
@@ -43,4 +43,3 @@ public class OrderItem {
                 + " = $" + getSubtotal());
     }
 }
-
