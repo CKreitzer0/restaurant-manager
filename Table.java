@@ -7,18 +7,21 @@ public class Table {
     private int capacity;
     //status (empty, busy,dirty)
     private String status;
+    private Order order;
 
     //constructor
     public Table(int num, int capacity){
         this.num = num;
         this.capacity = capacity;
         this.status = Status.EMPTY; //start as empty
+        this.order = null;
     }
 
     //seat a group. true = table was empty. false = busy
     public boolean seat(){
         if(status.equals(Status.EMPTY)){
             status = Status.BUSY;
+            order = new Order();
             return true;
         }
         return false;
@@ -28,6 +31,7 @@ public class Table {
     public boolean free(){
         if (status.equals(Status.BUSY)){
             status = Status.DIRTY;
+            order = null;
             return true;
         }
         return false;
@@ -51,5 +55,8 @@ public class Table {
     }
     public String getStatus(){
         return status;
+    }
+    public Order getOrder(){
+        return order;
     }
 }
