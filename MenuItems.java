@@ -2,13 +2,13 @@ package Restaurant_Manager;
 
 public class MenuItems {
     private String name;
-    private int priceInCents;
+    private double price;
     private boolean available;
 
     //constructor
-    public MenuItems(String name, int priceInCents){
+    public MenuItems(String name, double price){
         this.name = name;
-        this.priceInCents = priceInCents;
+        this.price = price;
         this.available = true;
     }
 
@@ -17,8 +17,8 @@ public class MenuItems {
         return name;
     }
 
-    public int getPriceInCents(){
-        return priceInCents;
+    public double getPrice(){
+        return price;
     }
 
     public boolean getAvailable(){
@@ -31,12 +31,7 @@ public class MenuItems {
     }
 
     //converts money from cent amount to dollar amount
-    public static String dollarConverter(int cents){
-        int dollars = cents / 100;
-        int extra = cents % 100;
-        if (extra < 10){
-            return "$" + dollars + ".0" + extra;
-        }
-        return "$" + dollars + "." + extra;
+    public static String money(double amount){
+        return String.format("$%.2f", amount);
     }
 }
