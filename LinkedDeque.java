@@ -1,4 +1,4 @@
-package Restaurant;
+package Restaurant_Manager;
 
 class DequeNode<T> {
 
@@ -135,4 +135,3 @@ public class LinkedDeque<T> {
         return size;
     }
 }
-
