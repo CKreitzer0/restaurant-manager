@@ -1,4 +1,4 @@
-package Restaurant;
+package Restaurant_Manager;
 
 public class Ticket {
 
