@@ -60,6 +60,10 @@ public class Kitchen {
         }
     }
 
+    public Ticket getTicket(int index) {
+        return pendingTickets.get(index);
+    }
+
     public int size() {
         return pendingTickets.size();
     }
@@ -68,4 +72,3 @@ public class Kitchen {
         return pendingTickets.isEmpty();
     }
 }
-
