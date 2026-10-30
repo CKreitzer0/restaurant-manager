@@ -7,6 +7,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/*
+AI Used for GUI creation via Java Swing
+*/
+
 /**
  * Restaurant Manager UI (pure Swing, no extra libraries).
  *
