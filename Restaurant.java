@@ -83,7 +83,7 @@ public class Restaurant {
     //Returns true if the order contains the item
     private boolean containsItem(Order order, String name){
         for (int i = 0; i < order.size(); i++){
-            if(order.getOrderItem(i).getItem().equals(name)){
+            if(order.getOrderItem(i).getItem().getName().equals(name)){
                 return true;
             }
         }
