@@ -1,147 +1,62 @@
 package Restaurant_Manager;
 
-public class Order {
+public class Table {
+    //table number
+    private int num;
+    //capacity of table
+    private int capacity;
+    //status (empty, busy,dirty)
+    private String status;
+    private Order order;
 
-    private OrderItem[] items;
-    private int size;
-
-    public Order() {
-        items = new OrderItem[5];
-        size = 0;
+    //constructor
+    public Table(int num, int capacity){
+        this.num = num;
+        this.capacity = capacity;
+        this.status = Status.EMPTY; //start as empty
+        this.order = null;
     }
 
-    private int findItem(String name) {
-        for (int i = 0; i < size; i++) {
-            if (items[i].getItem().getName().equals(name)) {
-                return i;
-            }
+    //seat a group. true = table was empty. false = busy
+    public boolean seat(){
+        if(status.equals(Status.EMPTY)){
+            status = Status.BUSY;
+            order = new Order();
+            return true;
         }
-        return -1;
+        return false;
     }
 
-    private void grow() {
-        OrderItem[] bigger = new OrderItem[items.length * 2];
-
-        for (int i = 0; i < size; i++) {
-            bigger[i] = items[i];
+    //If a group leaves, this frees the table
+    public boolean free(){
+        if (status.equals(Status.BUSY)){
+            status = Status.DIRTY;
+            order = null;
+            return true;
         }
-
-        items = bigger;
+        return false;
     }
 
-    public void addItem(MenuItems item, int quantity) {
-        if (item == null || quantity <= 0) {
-            System.out.println("Invalid item or quantity.");
-            return;
+    //For the busser to clean the table
+    public boolean clean(){
+        if(status.equals(Status.DIRTY)){
+            status = Status.EMPTY;
+            return true;
         }
-
-        int index = findItem(item.getName());
-
-        if (index != -1) {
-            items[index].addQuantity(quantity);
-            return;
-        }
-
-        if (size == items.length) {
-            grow();
-        }
-
-        items[size] = new OrderItem(item, quantity);
-        size++;
+        return false;
     }
 
-    public void removeItem(String name) {
-        int index = findItem(name);
-
-        if (index == -1) {
-            System.out.println("Item not found in the order.");
-            return;
-        }
-
-        for (int i = index; i < size - 1; i++) {
-            items[i] = items[i + 1];
-        }
-
-        size--;
-        items[size] = null;
+    //return the values
+    public int getNum(){
+        return num;
     }
-
-    public void changeQuantity(String name, int newQuantity) {
-        if (newQuantity <= 0) {
-            System.out.println("Quantity must be greater than 0.");
-            return;
-        }
-
-        int index = findItem(name);
-
-        if (index == -1) {
-            System.out.println("Item not found in the order.");
-            return;
-        }
-
-        items[index].setQuantity(newQuantity);
+    public int getCapacity(){
+        return capacity;
     }
-
-    public boolean isEmpty() {
-        return size == 0;
+    public String getStatus(){
+        return status;
     }
-
-    public int size() {
-        return size;
-    }
-
-    public OrderItem getOrderItem(int index) {
-        if (index < 0 || index >= size) {
-            return null;
-        }
-
-        return items[index];
-    }
-
-
-    public double calculateTotal() {
-        double total = 0;
-
-        for (int i = 0; i < size; i++) {
-            total = total + items[i].getSubtotal();
-        }
-
-        return total;
-    }
-
-    public void printReceipt(int tableNumber) {
-        System.out.println("----- RECEIPT: TABLE " + tableNumber + " -----");
-
-        if (isEmpty()) {
-            System.out.println("The order is empty.");
-            return;
-        }
-
-        for (int i = 0; i < size; i++) {
-            OrderItem current = items[i];
-
-            System.out.print(current.getQuantity() + " x "
-                    + current.getItem().getName() + " = $");
-
-            System.out.printf("%.2f%n", current.getSubtotal());
-        }
-
-        System.out.print("TOTAL: $");
-        System.out.printf("%.2f%n", calculateTotal());
-        System.out.println("------------------------------");
-    }
-
-    public Ticket createTicket(int ticketNumber, int tableNumber,
-                               int estimatedWaitMinutes) {
-
-        if (ticketNumber <= 0 || tableNumber <= 0 ||
-                estimatedWaitMinutes < 0 || isEmpty()) {
-
-            System.out.println("Cannot create ticket: invalid information or empty order.");
-            return null;
-        }
-
-        return new Ticket(ticketNumber, tableNumber,
-                this, estimatedWaitMinutes);
+    public Order getOrder(){
+        return order;
     }
 }
