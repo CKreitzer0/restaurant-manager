@@ -1,4 +1,4 @@
-package Restaurant;
+package Restaurant_Manager;
 
 public class Order {
 
@@ -29,7 +29,7 @@ public class Order {
         items = bigger;
     }
 
-    public void addItem(MenuItem item, int quantity) {
+    public void addItem(MenuItems item, int quantity) {
         if (item == null || quantity <= 0) {
             System.out.println("Invalid item or quantity.");
             return;
